@@ -1,5 +1,5 @@
 [package]
-name = "webserver"
+name = "rubiks"
 version = "0.1.0"
 authors = ["Angus Turner <angusturner27@gmail.com>"]
 edition = "2018"
