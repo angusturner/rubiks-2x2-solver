@@ -14,7 +14,7 @@ const TEST_DATA: [Facet; 24] = [
 fn bfs(query: &Cube) -> Option<Cube> {
     let root: Cube = Cube::solved();
     let mut seen: HashSet<[Facet; 24]> = HashSet::new();
-    let mut q: VecDeque<Cube> = VecDeque::with_capacity(1e6 as usize);
+    let mut q: VecDeque<Cube> = VecDeque::new();
     let facets = root.facets;
     q.push_back(root);
     seen.insert(facets);
@@ -38,17 +38,23 @@ fn main() {
     let mut query = Cube::new(TEST_DATA);
 
     // apply a bunch of random transformations, to make it harder...
-    query = ACTION_D2.transform(&query);
-    query = ACTION_B_INV.transform(&query);
-    query = ACTION_L2.transform(&query);
     query = ACTION_D.transform(&query);
-    query = ACTION_B_INV.transform(&query);
-    query = ACTION_L2.transform(&query);
-    query = ACTION_L.transform(&query);
-    query = ACTION_B_INV.transform(&query);
+    query = ACTION_B.transform(&query);
     query = ACTION_D.transform(&query);
     query = ACTION_L.transform(&query);
     query = ACTION_B.transform(&query);
+    query = ACTION_L.transform(&query);
+    query = ACTION_D.transform(&query);
+    println!("{:?}", &query);
+    // query = ACTION_L2.transform(&query);
+    // query = ACTION_D.transform(&query);
+    // query = ACTION_B_INV.transform(&query);
+    // query = ACTION_L2.transform(&query);
+    // query = ACTION_L.transform(&query);
+    // query = ACTION_B_INV.transform(&query);
+    // query = ACTION_D.transform(&query);
+    // query = ACTION_L.transform(&query);
+    // query = ACTION_B.transform(&query);
 
     if let Some(result) = bfs(&query) {
         println!("{:?}", result.history)
