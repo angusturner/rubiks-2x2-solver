@@ -1,9 +1,9 @@
 mod action;
 mod cube;
 
+use crate::action::{ACTION_B_INV, ACTION_D, ACTION_D2, ACTION_L, ACTION_L2, ACTION_B};
 use crate::cube::{Cube, Facet, Facet::*};
 use std::collections::{HashSet, VecDeque};
-use crate::action::{ACTION_D2, ACTION_B_INV, ACTION_L2};
 
 const TEST_DATA: [Facet; 24] = [
     RED, WHITE, ORANGE, WHITE, BLUE, RED, YELLOW, RED, BLUE, ORANGE, BLUE, BLUE, GREEN, GREEN,
@@ -36,9 +36,19 @@ fn bfs(query: &Cube) -> Option<Cube> {
 
 fn main() {
     let mut query = Cube::new(TEST_DATA);
+
+    // apply a bunch of random transformations, to make it harder...
     query = ACTION_D2.transform(&query);
     query = ACTION_B_INV.transform(&query);
     query = ACTION_L2.transform(&query);
+    query = ACTION_D.transform(&query);
+    query = ACTION_B_INV.transform(&query);
+    query = ACTION_L2.transform(&query);
+    query = ACTION_L.transform(&query);
+    query = ACTION_B_INV.transform(&query);
+    query = ACTION_D.transform(&query);
+    query = ACTION_L.transform(&query);
+    query = ACTION_B.transform(&query);
 
     if let Some(result) = bfs(&query) {
         println!("{:?}", result.history)

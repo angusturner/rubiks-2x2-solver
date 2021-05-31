@@ -48,10 +48,6 @@ impl Cube {
         Self::new(facets)
     }
 
-    pub(crate) fn equals(&self, other: &Cube) -> bool {
-        return self.facets == other.facets;
-    }
-
     pub(crate) fn children(&self) -> Vec<Cube> {
         ACTIONS.iter().map(|x| x.transform(self)).collect()
     }
